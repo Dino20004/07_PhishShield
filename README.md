@@ -4,9 +4,11 @@
 
 PhishShield AI is a production-grade, lightweight browser extension designed to protect users against phishing websites, typosquatting, Unicode homograph attacks, credential harvesting, drive-by downloads, and suspicious JavaScript injection in real-time. It executes all threat analysis locally inside the browser context, ensuring complete privacy with no remote dashboards required.
 
+<img width="479" height="675" alt="Screenshot 2026-07-01 103955" src="https://github.com/user-attachments/assets/d318aeef-0af1-4616-9f16-8d7ff0d654a3" />
+
 ---
 
-## 🚀 Key Features
+## Key Features
 
 *   **URL Similarity & Typosquatting**: Calculates Levenshtein Distance, Jaro-Winkler, and N-gram similarity on-the-fly to check if a domain is mimicking popular brands (e.g. `faceb00k.com`, `google-login-security.net`).
 *   **Homograph Spoofing Check**: Detects mixed Unicode scripts and Punycode (`xn--`) used to trick users (e.g. `аррӏе.com` using Cyrillic homographs).
@@ -20,7 +22,7 @@ PhishShield AI is a production-grade, lightweight browser extension designed to 
 
 ---
 
-## 🛠️ Architecture
+## Architecture
 
 ```text
 PhishShield/
@@ -52,7 +54,7 @@ PhishShield/
 
 ---
 
-## 📦 Installation Guide (Developer Mode)
+## Installation Guide (Developer Mode)
 
 To install PhishShield AI on Google Chrome, Microsoft Edge, Brave, or Opera:
 
@@ -73,7 +75,7 @@ To install PhishShield AI on Google Chrome, Microsoft Edge, Brave, or Opera:
 
 ---
 
-## ⚙️ AI Risk Engine Weights
+## AI Risk Engine Weights
 
 The risk engine compiles independent scores from each detection module using the following weight breakdown:
 
@@ -96,9 +98,11 @@ The risk engine compiles independent scores from each detection module using the
 *   🟠 **HIGH** (70 - 84): Phishing indicators identified. Block overlay triggered.
 *   🔴 **CRITICAL** (85 - 100): High-confidence malicious threat. Credentials submissions intercepted and blocked.
 
+<img width="942" height="677" alt="Screenshot 2026-07-01 102135" src="https://github.com/user-attachments/assets/6ebf0f9d-008d-4eb3-b2f4-d14d322a27ef" />
+
 ---
 
-## 🧪 Running Unit Tests
+## Running Unit Tests
 
 PhishShield AI features a fully native test suite requiring zero external dependencies to build or test. Tests run directly using the native Node.js test runner.
 
@@ -116,14 +120,15 @@ This runs the tests defined in `tests/engine.test.js` validating:
 6.  Weighted risk average equations.
 
 ---
+<img width="472" height="670" alt="Screenshot 2026-07-01 153521" src="https://github.com/user-attachments/assets/269a4406-7b56-4512-8479-21a16e4dbf03" />
 
-## 🔒 Security & Privacy
+## Security & Privacy
 
 *   **Zero Data Collection**: All calculations occur strictly on your local browser profile. No scanned URLs or credentials are sent to external cloud servers.
 *   **Local Whitelisting**: Trusted domains can be whitelisted at any time in the popup panel, which instantly overrides the risk engine score to 0.
 
 ---
 
-## 📄 License
+## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
