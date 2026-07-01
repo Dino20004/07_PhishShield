@@ -1,0 +1,13 @@
+{
+  "name": "phishshield-ai",
+  "version": "1.0.0",
+  "description": "AI-Powered real-time phishing and web threat detection engine browser extension.",
+  "main": "src/background.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/engine.test.js"
+  },
+  "author": "PhishShield AI Team",
+  "license": "MIT",
+  "private": true
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PhishShield AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-container">
+      <div class="logo-shield">🛡️</div>
+      <div class="logo-text">
+        <span class="logo-title">PhishShield <span class="logo-accent">AI</span></span>
+        <span class="logo-tagline">Real-time Threat Agent</span>
+      </div>
+    </div>
+    <button id="btn-settings" class="btn-icon" title="Settings">⚙️</button>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+    
+    <!-- Score Dashboard -->
+    <section id="panel-dashboard" class="panel active">
+      <div class="score-card">
+        <div class="score-radial">
+          <svg class="progress-ring" width="120" height="120">
+            <circle class="progress-ring__circle-bg" stroke="rgba(255, 255, 255, 0.05)" stroke-width="8" fill="transparent" r="50" cx="60" cy="60" />
+            <circle id="progress-bar" class="progress-ring__circle" stroke="#22C55E" stroke-width="8" fill="transparent" r="50" cx="60" cy="60" />
+          </svg>
+          <div class="score-value-container">
+            <span id="score-number" class="score-number">0</span>
+            <span class="score-label">RISK</span>
+          </div>
+        </div>
+        <div id="risk-badge" class="risk-badge badge-safe">SAFE</div>
+        <div id="active-domain" class="active-domain">loading...</div>
+      </div>
+
+      <!-- Quick Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-icon">🔒</span>
+          <span class="stat-label">SSL Connection</span>
+          <span id="stat-ssl" class="stat-value">Secure</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">📅</span>
+          <span class="stat-label">Domain Age</span>
+          <span id="stat-age" class="stat-value">Fetching...</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🎯</span>
+          <span class="stat-label">Brand Spoofing</span>
+          <span id="stat-brand" class="stat-value">None</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">⚡</span>
+          <span class="stat-label">Threat Flags</span>
+          <span id="stat-threats" class="stat-value">0 Found</span>
+        </div>
+      </div>
+
+      <!-- Recommendation Message -->
+      <div id="recommendation-box" class="recommendation-box card-safe">
+        <div id="recommendation-text" class="recommendation-text">Analyzing page threat vectors...</div>
+      </div>
+
+      <!-- Threat Details List (Collapsed by default, shown if threat found) -->
+      <div id="threat-list-container" class="threat-list-container hidden">
+        <h3 class="section-title">Active Threats Detected</h3>
+        <div id="threat-list" class="threat-list"></div>
+      </div>
+
+      <!-- Whitelist Action -->
+      <div class="action-footer">
+        <button id="btn-whitelist" class="btn btn-secondary">Trust This Site</button>
+        <button id="btn-history" class="btn btn-primary">Scan History</button>
+      </div>
+    </section>
+
+    <!-- Settings Panel -->
+    <section id="panel-settings" class="panel">
+      <div class="panel-header">
+        <button id="btn-back-settings" class="btn-back">⬅️ Back</button>
+        <h2 class="panel-title">Settings</h2>
+      </div>
+
+      <div class="settings-list">
+        <div class="setting-item">
+          <div class="setting-details">
+            <span class="setting-label">Enable AI Scoring Engine</span>
+            <span class="setting-desc">Use heuristics and fuzzy matching.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="setting-ai" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-details">
+            <span class="setting-label">Enable Live Age Analysis</span>
+            <span class="setting-desc">Check domain registration via RDAP query.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="setting-whois" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-details">
+            <span class="setting-label">Enable JavaScript Threat Scan</span>
+            <span class="setting-desc">Detect keylogging, eval, and cookie theft.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="setting-js" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-details">
+            <span class="setting-label">Enable Push Notifications</span>
+            <span class="setting-desc">Notify on background security alerts.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="setting-notifications" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+        
+        <div class="setting-item">
+          <div class="setting-details">
+            <span class="setting-label">Dark Mode UI Theme</span>
+            <span class="setting-desc">Applies premium aesthetic styling.</span>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="setting-dark" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- History Panel -->
+    <section id="panel-history" class="panel">
+      <div class="panel-header">
+        <button id="btn-back-history" class="btn-back">⬅️ Back</button>
+        <h2 class="panel-title">Scan Log History</h2>
+      </div>
+
+      <div class="history-controls">
+        <button id="btn-export" class="btn btn-secondary btn-sm">Export Reports</button>
+        <button id="btn-clear-history" class="btn btn-danger btn-sm">Clear Log</button>
+      </div>
+
+      <!-- Export Formats Subpanel -->
+      <div id="export-dropdown" class="export-dropdown hidden">
+        <button id="export-json" class="export-opt">Export JSON</button>
+        <button id="export-csv" class="export-opt">Export CSV</button>
+        <button id="export-txt" class="export-opt">Export TXT</button>
+      </div>
+
+      <div id="history-list" class="history-list">
+        <!-- Injected scans -->
+        <div class="history-empty">No scanned pages logged yet.</div>
+      </div>
+    </section>
+
+  </main>
+  <script src="popup.js" type="module"></script>
+</body>
+</html>
